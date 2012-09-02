@@ -30,11 +30,11 @@ describe('basic test', function () {
     stream
       .bank(0)
       .program(0)
-      .noteOn(60, 127)
+      .noteOn(60)
       .rest(200)
-      .noteOff(60)
-      .noteOn(72, 127)
+      .noteOff()
+      .noteOn(72)
       .rest(200)
-      .noteOff(72)
+      .noteOff()
   });
 });

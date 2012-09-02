@@ -4,6 +4,7 @@ module.exports = function () {
   var stream = es.through(write)
     , channel = 0
     , q = []
+    , notesOn = {}
 
   function write (data) {
     if (data[0] === 'rest') {
@@ -19,11 +20,8 @@ module.exports = function () {
     }
   };
 
-  function drain () {
-    if (stream.paused) {
-      return;
-    }
-    if (q.length) {
+  function drain (draining) {
+    if (!stream.paused && q.length) {
       q.shift().call(stream, function () {
         process.nextTick(drain);
       });
@@ -32,8 +30,6 @@ module.exports = function () {
       process.nextTick(drain);
     }
   }
-
-  stream.on('drain', drain);
 
   stream.channel = function (ch) {
     channel = ch;
@@ -71,12 +67,25 @@ module.exports = function () {
   };
 
   stream.noteOn = function (number, velocity) {
-    return stream.send(0x9, number, velocity);
+    notesOn[channel] || (notesOn[channel] = {});
+    notesOn[channel][number] = true;
+    return stream.send(0x9, number, velocity || 127);
   };
 
   stream.noteOff = function (number, velocity) {
-    return stream.send(0x8, number, velocity);
+    if (typeof number === 'undefined') {
+      if (!notesOn[channel]) return stream;
+      Object.keys(notesOn[channel]).forEach(noteOff);
+      return stream;
+    }
+    return noteOff(number, velocity);
   };
+
+  function noteOff (number, velocity) {
+    if (!notesOn[channel] || !notesOn[channel][number]) return stream;
+    delete notesOn[channel][number];
+    return stream.send(0x8, number, velocity);
+  }
 
   stream.rest = function (ms) {
     stream.write(['rest', ms]);
