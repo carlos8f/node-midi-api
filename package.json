@@ -1,9 +1,11 @@
 {
-  "name": "midiapi",
+  "name": "midi-api",
   "version": "0.0.0",
   "description": "an API to simplify MIDI message generation",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "event-stream": "~3.0.4"
+  },
   "devDependencies": {
     "mocha": "*"
   },
@@ -12,9 +14,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/carlos8f/node-midiapi.git"
+    "url": "git://github.com/carlos8f/node-midi-api.git"
   },
-  "homepage": "https://github.com/carlos8f/node-midiapi",
+  "homepage": "https://github.com/carlos8f/node-midi-api",
   "keywords": [
     "midi",
     "music",

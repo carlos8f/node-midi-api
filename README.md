@@ -1,9 +1,9 @@
-midiapi
-=======
+midi-api
+========
 
 an API to simplify MIDI message generation
 
-[![build status](https://secure.travis-ci.org/carlos8f/node-midiapi.png)](http://travis-ci.org/carlos8f/node-midiapi)
+[![build status](https://secure.travis-ci.org/carlos8f/node-midi-api.png)](http://travis-ci.org/carlos8f/node-midi-api)
 
 - - -
 
