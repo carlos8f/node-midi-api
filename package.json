@@ -1,0 +1,26 @@
+{
+  "name": "midiapi",
+  "version": "0.0.0",
+  "description": "an API to simplify MIDI message generation",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/carlos8f/node-midiapi.git"
+  },
+  "homepage": "https://github.com/carlos8f/node-midiapi",
+  "keywords": [
+    "midi",
+    "music",
+    "api",
+    "interface"
+  ],
+  "author": "Carlos Rodriguez <carlos@s8f.org> (http://s8f.org/)",
+  "license": "MIT"
+}
