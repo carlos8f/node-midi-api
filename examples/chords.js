@@ -3,6 +3,7 @@ var coremidi = require('coremidi');
 var api = require('../')({end: true})
     .bank(2)
     .program(4)
+    .rest(500)
 
 function maj7 (root) {
   api
