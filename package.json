@@ -7,7 +7,8 @@
     "event-stream": "~3.0.4"
   },
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "*",
+    "coremidi": "~0.0.1"
   },
   "scripts": {
     "test": "make test"
