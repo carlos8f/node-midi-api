@@ -12,7 +12,7 @@ Examples
 
 ```javascript
 var coremidi = require('coremidi')
-  , midi = require('../')()
+  , midi = require('midi-api')()
     .bank(2)
     .program(33)
     .rest(500)
@@ -45,7 +45,7 @@ midi.pipe(coremidi.stream())
 
 ```javascript
 var coremidi = require('coremidi')
-  , midi = require('../')()
+  , midi = require('midi-api')()
     .bank(2)
     .program(4)
     .rest(500)
