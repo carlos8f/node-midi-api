@@ -7,6 +7,7 @@ module.exports = function (options) {
     , notesOn = {}
 
   options || (options = {});
+  if (typeof options.end === 'undefined') options.end = true;
 
   function write (data) {
     if (data[0] === 'rest') {

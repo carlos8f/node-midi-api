@@ -1,12 +1,10 @@
-var api = require('../')
+var midi = require('../')({end: true})
 
 describe('basic test', function () {
-  var stream = api();
-
   it('plays', function (done) {
     var messages = [], restStart;
 
-    stream.on('data', function (message) {
+    midi.on('data', function (message) {
       messages.push(message);
       if (messages.length === 3) {
         assert.deepEqual(messages, [[ 176, 0, 0 ], [ 192, 50, 0 ], [ 144, 60, 127 ]]);
@@ -23,10 +21,9 @@ describe('basic test', function () {
       else if (messages.length === 6) {
         assert.deepEqual(message, [ 128, 72, 0 ]);
         assert((new Date().getTime() - restStart.getTime()) >= 200);
-        done();
       }
     });
-    stream
+    midi
       .bank(0)
       .program(50)
       .noteOn(60)
@@ -35,5 +32,6 @@ describe('basic test', function () {
       .noteOn(72)
       .rest(200)
       .noteOff()
+      .once('end', done)
   });
 });

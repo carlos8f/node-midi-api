@@ -1,22 +1,28 @@
 var coremidi = require('coremidi')
-  , api = require('../')({end: true})
+  , midi = require('../')()
     .bank(2)
     .program(33)
     .rest(500)
 
 function maj7 (root) {
-  api
+  midi
+    .noteOff()
     .noteOn(root)
     .noteOn(root + 4)
     .noteOn(root + 7)
     .noteOn(root + 11)
-    .rest(1000)
-    .noteOff()
 }
 
-maj7(60)
-maj7(61)
-maj7(62)
-maj7(63)
+maj7(44)
+midi.rest(200)
+maj7(45)
+midi.rest(200)
+maj7(46)
+midi.rest(200)
+maj7(47)
+midi
+  .rest(1000)
+  .noteOff()
+  .rest(400)
 
-api.pipe(coremidi.stream())
+midi.pipe(coremidi.stream())
