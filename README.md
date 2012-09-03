@@ -39,7 +39,7 @@ Example: playing scales
 
 ```javascript
 var coremidi = require('coremidi')
-  , api = require('../')({end: true})
+  , api = require('midi-api')({end: true})
     .bank(2)
     .program(4)
     .rest(1000)
