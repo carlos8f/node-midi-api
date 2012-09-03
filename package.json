@@ -7,8 +7,7 @@
     "through": "~1.0.0"
   },
   "devDependencies": {
-    "mocha": "*",
-    "coremidi": "~0.0.2"
+    "mocha": "*"
   },
   "scripts": {
     "test": "make test"
