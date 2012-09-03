@@ -70,7 +70,7 @@ module.exports = function (options) {
   };
 
   stream.program = function (number) {
-    return stream.control(0xC, number);
+    return stream.send(0xC, number);
   };
 
   stream.noteOn = function (number, velocity) {

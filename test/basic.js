@@ -9,7 +9,7 @@ describe('basic test', function () {
     stream.on('data', function (message) {
       messages.push(message);
       if (messages.length === 3) {
-        assert.deepEqual(messages, [[ 176, 0, 0 ], [ 176, 12, 50 ], [ 144, 60, 127 ]]);
+        assert.deepEqual(messages, [[ 176, 0, 0 ], [ 192, 50, 0 ], [ 144, 60, 127 ]]);
         restStart = new Date();
       }
       else if (messages.length === 4) {
