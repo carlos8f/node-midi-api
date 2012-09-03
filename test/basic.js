@@ -1,5 +1,4 @@
 var api = require('../')
-  , es = require('event-stream')
 
 describe('basic test', function () {
   var stream = api();
