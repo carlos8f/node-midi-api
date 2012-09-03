@@ -5,8 +5,10 @@ an API to simplify MIDI message generation
 
 [![build status](https://secure.travis-ci.org/carlos8f/node-midi-api.png)](http://travis-ci.org/carlos8f/node-midi-api)
 
-Example: playing chords
------------------------
+Examples
+--------
+
+### Playing chords
 
 ```javascript
 var coremidi = require('coremidi');
@@ -34,8 +36,7 @@ maj7(63)
 api.pipe(coremidi.stream());
 ```
 
-Example: playing scales
------------------------
+### Playing scales
 
 ```javascript
 var coremidi = require('coremidi')
