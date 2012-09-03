@@ -45,10 +45,10 @@ midi.pipe(coremidi.stream())
 
 ```javascript
 var coremidi = require('coremidi')
-  , api = require('midi-api')({end: true})
+  , midi = require('../')()
     .bank(2)
     .program(4)
-    .rest(1000)
+    .rest(500)
 
 function scale (root) {
   var scale = [ 0, 2, 2, 1, 2, 2, 2, 1 ]
@@ -63,7 +63,7 @@ function scale (root) {
     else {
       var interval = backwards.pop()
       if (!interval) {
-        api
+        midi
           .rest(400)
           .noteOff()
           .rest(500)
@@ -73,7 +73,7 @@ function scale (root) {
       pitch -= interval
     }
 
-    api
+    midi
       .noteOff()
       .noteOn(pitch)
       .rest(200)
@@ -87,8 +87,9 @@ scale(60)
 scale(61)
 scale(62)
 scale(63)
+midi.rest(500)
 
-api.pipe(coremidi.stream())
+midi.pipe(coremidi.stream())
 ```
 
 - - -
