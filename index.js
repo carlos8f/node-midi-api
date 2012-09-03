@@ -1,7 +1,7 @@
-var es = require('event-stream');
+var through = require('through');
 
 module.exports = function (options) {
-  var stream = es.through(write)
+  var stream = through(write)
     , channel = 0
     , q = []
     , notesOn = {}

@@ -1,4 +1,4 @@
-var midi = require('../')({end: true})
+var midi = require('../')()
 
 describe('basic test', function () {
   it('plays', function (done) {

@@ -4,11 +4,11 @@
   "description": "an API to simplify MIDI message generation",
   "main": "index.js",
   "dependencies": {
-    "event-stream": "~3.0.4"
+    "through": "~1.0.0"
   },
   "devDependencies": {
     "mocha": "*",
-    "coremidi": "~0.0.1"
+    "coremidi": "~0.0.2"
   },
   "scripts": {
     "test": "make test"
