@@ -5,6 +5,86 @@ an API to simplify MIDI message generation
 
 [![build status](https://secure.travis-ci.org/carlos8f/node-midi-api.png)](http://travis-ci.org/carlos8f/node-midi-api)
 
+Example: playing chords
+-----------------------
+
+```javascript
+var coremidi = require('coremidi');
+
+var api = require('midi-api')({end: true})
+  .bank(2)
+  .program(4)
+  .rest(500)
+
+function maj7 (root) {
+  api
+    .noteOn(root)
+    .noteOn(root + 4)
+    .noteOn(root + 7)
+    .noteOn(root + 11)
+    .rest(1000)
+    .noteOff()
+}
+
+maj7(60)
+maj7(61)
+maj7(62)
+maj7(63)
+
+api.pipe(coremidi.stream());
+```
+
+Example: playing scales
+-----------------------
+
+```javascript
+var coremidi = require('coremidi')
+  , api = require('../')({end: true})
+    .bank(2)
+    .program(4)
+    .rest(1000)
+
+function scale (root) {
+  var scale = [ 0, 2, 2, 1, 2, 2, 2, 1 ]
+    , backwards = []
+
+  ;(function next (pitch) {
+    if (scale.length) {
+      var interval = scale.shift()
+      backwards.push(interval)
+      pitch += interval
+    }
+    else {
+      var interval = backwards.pop()
+      if (!interval) {
+        api
+          .rest(400)
+          .noteOff()
+          .rest(500)
+
+        return;
+      }
+      pitch -= interval
+    }
+
+    api
+      .noteOff()
+      .noteOn(pitch)
+      .rest(200)
+
+    next(pitch)
+
+  })(root)
+}
+
+scale(60)
+scale(61)
+scale(62)
+scale(63)
+
+api.pipe(coremidi.stream())
+```
+
 - - -
 
 ### Developed by [Terra Eclipse](http://www.terraeclipse.com)

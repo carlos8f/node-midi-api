@@ -1,6 +1,5 @@
-var coremidi = require('coremidi');
-
-var api = require('../')({end: true})
+var coremidi = require('coremidi')
+  , api = require('../')({end: true})
     .bank(2)
     .program(4)
     .rest(1000)
@@ -11,12 +10,12 @@ function scale (root) {
 
   ;(function next (pitch) {
     if (scale.length) {
-      var interval = scale.shift();
-      backwards.push(interval);
-      pitch += interval;
+      var interval = scale.shift()
+      backwards.push(interval)
+      pitch += interval
     }
     else {
-      var interval = backwards.pop();
+      var interval = backwards.pop()
       if (!interval) {
         api
           .rest(400)
@@ -25,7 +24,7 @@ function scale (root) {
 
         return;
       }
-      pitch -= interval;
+      pitch -= interval
     }
 
     api
@@ -33,9 +32,9 @@ function scale (root) {
       .noteOn(pitch)
       .rest(200)
 
-    next(pitch);
+    next(pitch)
 
-  })(root);
+  })(root)
 }
 
 scale(60)

@@ -1,8 +1,7 @@
-var coremidi = require('coremidi');
-
-var api = require('../')({end: true})
+var coremidi = require('coremidi')
+  , api = require('../')({end: true})
     .bank(2)
-    .program(4)
+    .program(33)
     .rest(500)
 
 function maj7 (root) {
@@ -20,4 +19,4 @@ maj7(61)
 maj7(62)
 maj7(63)
 
-api.pipe(coremidi.stream());
+api.pipe(coremidi.stream())
