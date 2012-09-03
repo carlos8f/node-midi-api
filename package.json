@@ -1,6 +1,6 @@
 {
   "name": "midi-api",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "an API to simplify MIDI message generation",
   "main": "index.js",
   "dependencies": {
