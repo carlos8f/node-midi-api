@@ -1,10 +1,12 @@
 var es = require('event-stream');
 
-module.exports = function () {
+module.exports = function (options) {
   var stream = es.through(write)
     , channel = 0
     , q = []
     , notesOn = {}
+
+  options || (options = {});
 
   function write (data) {
     if (data[0] === 'rest') {
@@ -20,10 +22,15 @@ module.exports = function () {
     }
   };
 
-  function drain (draining) {
+  function drain () {
     if (!stream.paused && q.length) {
-      q.shift().call(stream, function () {
-        process.nextTick(drain);
+      q.shift().call(stream, function (err) {
+        if (err) {
+          stream.emit('error', err);
+          return stream.end();
+        }
+        if (!q.length && options.end) return stream.end();
+        drain();
       });
     }
     else {
