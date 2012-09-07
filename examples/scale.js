@@ -43,4 +43,4 @@ scale(62)
 scale(63)
 midi.rest(500)
 
-midi.pipe(coremidi.stream())
+midi.pipe(coremidi())

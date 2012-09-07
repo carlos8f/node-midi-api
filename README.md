@@ -38,7 +38,7 @@ midi
   .noteOff()
   .rest(400)
 
-midi.pipe(coremidi.stream())
+midi.pipe(coremidi())
 ```
 
 ### Playing scales
@@ -89,7 +89,7 @@ scale(62)
 scale(63)
 midi.rest(500)
 
-midi.pipe(coremidi.stream())
+midi.pipe(coremidi())
 ```
 
 - - -

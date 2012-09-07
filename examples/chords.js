@@ -25,4 +25,4 @@ midi
   .noteOff()
   .rest(400)
 
-midi.pipe(coremidi.stream())
+midi.pipe(coremidi())
