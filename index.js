@@ -92,7 +92,7 @@ module.exports = function (options) {
   function noteOff (number, velocity) {
     if (!notesOn[channel] || !notesOn[channel][number]) return stream;
     delete notesOn[channel][number];
-    return stream.send(0x8, number, velocity);
+    return stream.send(0x8, parseInt(number, 10), velocity);
   }
 
   stream.rest = function (ms) {
