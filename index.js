@@ -5,6 +5,7 @@ module.exports = function (options) {
     , channel = 0
     , q = []
     , notesOn = {}
+    , isPlaying = false
 
   options || (options = {});
   if (typeof options.end === 'undefined') options.end = true;
@@ -21,21 +22,37 @@ module.exports = function (options) {
         cb();
       });
     }
+    if (!stream.paused) stream.resume();
   };
 
-  function drain () {
+  stream.resume = function () {
+    if (!isPlaying) {
+      isPlaying = true;
+      process.nextTick(next);
+    }
+  }
+
+  function stop () {
+    isPlaying = false;
+    if (!q.length && options.end) {
+      stream.end();
+      return true;
+    }
+    return false;
+  }
+
+  function next () {
     if (!stream.paused && q.length) {
       q.shift().call(stream, function (err) {
         if (err) {
           stream.emit('error', err);
-          return stream.end();
+          return stream.emit('close');
         }
-        if (!q.length && options.end) return stream.end();
-        drain();
+        if (!stop() && !stream.paused) stream.resume();
       });
     }
     else {
-      process.nextTick(drain);
+      stop();
     }
   }
 
@@ -99,8 +116,6 @@ module.exports = function (options) {
     stream.write(['rest', ms]);
     return stream;
   };
-
-  drain();
 
   return stream;
 };
